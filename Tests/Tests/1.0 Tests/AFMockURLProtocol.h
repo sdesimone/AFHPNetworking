@@ -1,6 +1,6 @@
-// AFMockURLProtocol.h
+// AFHPMockURLProtocol.h
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,15 +24,15 @@
 
 #import "OCMock.h"
 
-@protocol AFMockURLProtocolProxy <NSObject>
+@protocol AFHPMockURLProtocolProxy <NSObject>
 - (id)stub;
 - (id)expect;
 - (id)reject;
 @end
 
-@interface AFMockURLProtocol : NSURLProtocol <NSURLAuthenticationChallengeSender>
+@interface AFHPMockURLProtocol : NSURLProtocol <NSURLAuthenticationChallengeSender>
 
 + (void)handleNextRequestForURL:(NSURL *)URL
-                     usingBlock:(void (^)(AFMockURLProtocol <AFMockURLProtocolProxy> * protocol))block;
+                     usingBlock:(void (^)(AFHPMockURLProtocol <AFHPMockURLProtocolProxy> * protocol))block;
 
 @end

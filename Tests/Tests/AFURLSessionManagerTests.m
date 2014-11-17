@@ -1,6 +1,6 @@
-// AFNetworkActivityManagerTests.m
+// AFHPNetworkActivityManagerTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,15 +24,15 @@
 
 #import "AFURLSessionManager.h"
 
-@interface AFURLSessionManagerTests : AFTestCase
-@property (readwrite, nonatomic, strong) AFURLSessionManager *manager;
+@interface AFHPURLSessionManagerTests : AFHPTestCase
+@property (readwrite, nonatomic, strong) AFHPURLSessionManager *manager;
 @end
 
-@implementation AFURLSessionManagerTests
+@implementation AFHPURLSessionManagerTests
 
 - (void)setUp {
     [super setUp];
-    self.manager = [[AFURLSessionManager alloc] init];
+    self.manager = [[AFHPURLSessionManager alloc] init];
 }
 
 #pragma mark -

@@ -1,6 +1,6 @@
 // UIProgressView+AFNetworking.h
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,12 +28,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class AFURLConnectionOperation;
+@class AFHPURLConnectionOperation;
 
 /**
  This category adds methods to the UIKit framework's `UIProgressView` class. The methods in this category provide support for binding the progress to the upload and download progress of a session task or request operation.
  */
-@interface UIProgressView (AFNetworking)
+@interface UIProgressView (AFHPNetworking)
 
 ///------------------------------------
 /// @name Setting Session Task Progress
@@ -71,7 +71,7 @@
  @param operation The request operation.
  @param animated `YES` if the change should be animated, `NO` if the change should happen immediately.
  */
-- (void)setProgressWithUploadProgressOfOperation:(AFURLConnectionOperation *)operation
+- (void)setProgressWithUploadProgressOfOperation:(AFHPURLConnectionOperation *)operation
                                         animated:(BOOL)animated;
 
 /**
@@ -80,7 +80,7 @@
  @param operation The request operation.
  @param animated `YES` if the change should be animated, `NO` if the change should happen immediately.
  */
-- (void)setProgressWithDownloadProgressOfOperation:(AFURLConnectionOperation *)operation
+- (void)setProgressWithDownloadProgressOfOperation:(AFHPURLConnectionOperation *)operation
                                           animated:(BOOL)animated;
 
 @end

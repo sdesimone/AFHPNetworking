@@ -31,7 +31,7 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
 @property (readwrite, nonatomic, copy) NSString *avatarImageURLString;
 
 #ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
-@property (readwrite, nonatomic, strong) AFHTTPRequestOperation *avatarImageRequestOperation;
+@property (readwrite, nonatomic, strong) AFHPHTTPRequestOperation *avatarImageRequestOperation;
 #endif
 @end
 
@@ -73,9 +73,9 @@ NSString * const kUserProfileImageDidLoadNotification = @"com.alamofire.user.pro
 	if (!_profileImage && !_avatarImageRequestOperation) {
         NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:self.avatarImageURL];
         [mutableRequest setValue:@"image/*" forHTTPHeaderField:@"Accept"];
-        AFHTTPRequestOperation *imageRequestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:mutableRequest];
-        imageRequestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-        [imageRequestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSImage *responseImage) {
+        AFHPHTTPRequestOperation *imageRequestOperation = [[AFHPHTTPRequestOperation alloc] initWithRequest:mutableRequest];
+        imageRequestOperation.responseSerializer = [AFHPImageResponseSerializer serializer];
+        [imageRequestOperation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, NSImage *responseImage) {
             self.profileImage = responseImage;
 
 			_avatarImageRequestOperation = nil;

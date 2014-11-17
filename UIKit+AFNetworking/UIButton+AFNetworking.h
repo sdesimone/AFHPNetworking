@@ -1,6 +1,6 @@
 // UIButton+AFNetworking.h
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,12 +28,12 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol AFURLResponseSerialization, AFImageCache;
+@protocol AFHPURLResponseSerialization, AFHPImageCache;
 
 /**
  This category adds methods to the UIKit framework's `UIButton` class. The methods in this category provide support for loading remote images and background images asynchronously from a URL.
  */
-@interface UIButton (AFNetworking)
+@interface UIButton (AFHPNetworking)
 
 ///----------------------------
 /// @name Accessing Image Cache
@@ -42,14 +42,14 @@
 /**
  The image cache used to improve image loadiing performance on scroll views. By default, `UIButton` will use the `sharedImageCache` of `UIImageView`.
  */
-+ (id <AFImageCache>)sharedImageCache;
++ (id <AFHPImageCache>)sharedImageCache;
 
 /**
  Set the cache used for image loading.
 
  @param imageCache The image cache.
  */
-+ (void)setSharedImageCache:(id <AFImageCache>)imageCache;
++ (void)setSharedImageCache:(id <AFHPImageCache>)imageCache;
 
 ///------------------------------------
 /// @name Accessing Response Serializer
@@ -60,7 +60,7 @@
 
  @discussion Subclasses of `AFImageResponseSerializer` could be used to perform post-processing, such as color correction, face detection, or other effects. See https://github.com/AFNetworking/AFCoreImageSerializer
  */
-@property (nonatomic, strong) id <AFURLResponseSerialization> imageResponseSerializer;
+@property (nonatomic, strong) id <AFHPURLResponseSerialization> imageResponseSerializer;
 
 ///--------------------
 /// @name Setting Image

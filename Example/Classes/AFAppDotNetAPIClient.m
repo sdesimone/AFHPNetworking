@@ -1,4 +1,4 @@
-// AFAppDotNetAPIClient.h
+// AFHPAppDotNetAPIClient.h
 //
 // Copyright (c) 2012 Mattt Thompson (http://mattt.me/)
 // 
@@ -22,16 +22,16 @@
 
 #import "AFAppDotNetAPIClient.h"
 
-static NSString * const AFAppDotNetAPIBaseURLString = @"https://api.app.net/";
+static NSString * const AFHPAppDotNetAPIBaseURLString = @"https://api.app.net/";
 
-@implementation AFAppDotNetAPIClient
+@implementation AFHPAppDotNetAPIClient
 
 + (instancetype)sharedClient {
-    static AFAppDotNetAPIClient *_sharedClient = nil;
+    static AFHPAppDotNetAPIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedClient = [[AFAppDotNetAPIClient alloc] initWithBaseURL:[NSURL URLWithString:AFAppDotNetAPIBaseURLString]];
-        _sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        _sharedClient = [[AFHPAppDotNetAPIClient alloc] initWithBaseURL:[NSURL URLWithString:AFHPAppDotNetAPIBaseURLString]];
+        _sharedClient.securityPolicy = [AFHPSecurityPolicy policyWithPinningMode:AFHPSSLPinningModeNone];
     });
     
     return _sharedClient;

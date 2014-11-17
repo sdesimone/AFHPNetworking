@@ -1,6 +1,6 @@
 // UIActivityIndicatorView+AFNetworking.h
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,12 +28,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class AFURLConnectionOperation;
+@class AFHPURLConnectionOperation;
 
 /**
  This category adds methods to the UIKit framework's `UIActivityIndicatorView` class. The methods in this category provide support for automatically starting and stopping animation depending on the loading state of a request operation or session task.
  */
-@interface UIActivityIndicatorView (AFNetworking)
+@interface UIActivityIndicatorView (AFHPNetworking)
 
 ///----------------------------------
 /// @name Animating for Session Tasks
@@ -57,7 +57,7 @@
  
  @param operation The operation. If `nil`, automatic updating from any previously specified operation will be disabled.
  */
-- (void)setAnimatingWithStateOfOperation:(AFURLConnectionOperation *)operation;
+- (void)setAnimatingWithStateOfOperation:(AFHPURLConnectionOperation *)operation;
 
 @end
 

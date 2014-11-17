@@ -1,6 +1,6 @@
-// AFNetworkingTests.m
+// AFHPNetworkingTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,13 +23,13 @@
 #import "AFNetworkingTests.h"
 #import "AFHTTPRequestOperationLogger.h"
 
-NSString * const AFNetworkingTestsBaseURLString = @"http://httpbin.org/";
+NSString * const AFHPNetworkingTestsBaseURLString = @"http://httpbin.org/";
 
-@implementation AFNetworkingTests
+@implementation AFHPNetworkingTests
 
 + (void)load {
     if ([[[[[NSProcessInfo processInfo] environment] valueForKey:@"AFTestsLoggingEnabled"] uppercaseString] isEqualToString:@"YES"]) {
-        [[AFHTTPRequestOperationLogger sharedLogger] startLogging];
+        [[AFHPHTTPRequestOperationLogger sharedLogger] startLogging];
     }
 }
 

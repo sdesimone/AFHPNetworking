@@ -1,6 +1,6 @@
 // UIButton+AFNetworking.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -53,11 +53,11 @@ static const char * af_imageRequestOperationKeyForState(UIControlState state) {
     return [[NSString stringWithFormat:@"af_imageRequestOperationKeyForState_%lu", (unsigned long)state] cStringUsingEncoding:NSASCIIStringEncoding];
 }
 
-- (AFHTTPRequestOperation *)af_imageRequestOperationForState:(UIControlState)state {
-    return (AFHTTPRequestOperation *)objc_getAssociatedObject(self, af_imageRequestOperationKeyForState(state));
+- (AFHPHTTPRequestOperation *)af_imageRequestOperationForState:(UIControlState)state {
+    return (AFHPHTTPRequestOperation *)objc_getAssociatedObject(self, af_imageRequestOperationKeyForState(state));
 }
 
-- (void)af_setImageRequestOperation:(AFHTTPRequestOperation *)imageRequestOperation
+- (void)af_setImageRequestOperation:(AFHPHTTPRequestOperation *)imageRequestOperation
                            forState:(UIControlState)state
 {
     objc_setAssociatedObject(self, af_imageRequestOperationKeyForState(state), imageRequestOperation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -69,11 +69,11 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
     return [[NSString stringWithFormat:@"af_backgroundImageRequestOperationKeyForState_%lu", (unsigned long)state] cStringUsingEncoding:NSASCIIStringEncoding];
 }
 
-- (AFHTTPRequestOperation *)af_backgroundImageRequestOperationForState:(UIControlState)state {
-    return (AFHTTPRequestOperation *)objc_getAssociatedObject(self, af_backgroundImageRequestOperationKeyForState(state));
+- (AFHPHTTPRequestOperation *)af_backgroundImageRequestOperationForState:(UIControlState)state {
+    return (AFHPHTTPRequestOperation *)objc_getAssociatedObject(self, af_backgroundImageRequestOperationKeyForState(state));
 }
 
-- (void)af_setBackgroundImageRequestOperation:(AFHTTPRequestOperation *)imageRequestOperation
+- (void)af_setBackgroundImageRequestOperation:(AFHPHTTPRequestOperation *)imageRequestOperation
                                      forState:(UIControlState)state
 {
     objc_setAssociatedObject(self, af_backgroundImageRequestOperationKeyForState(state), imageRequestOperation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -83,26 +83,26 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
 
 #pragma mark -
 
-@implementation UIButton (AFNetworking)
+@implementation UIButton (AFHPNetworking)
 
-+ (id <AFImageCache>)sharedImageCache {
++ (id <AFHPImageCache>)sharedImageCache {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu"
     return objc_getAssociatedObject(self, @selector(sharedImageCache)) ?: [UIImageView sharedImageCache];
 #pragma clang diagnostic pop
 }
 
-+ (void)setSharedImageCache:(id <AFImageCache>)imageCache {
++ (void)setSharedImageCache:(id <AFHPImageCache>)imageCache {
     objc_setAssociatedObject(self, @selector(sharedImageCache), imageCache, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark -
 
-- (id <AFURLResponseSerialization>)imageResponseSerializer {
-    static id <AFURLResponseSerialization> _af_defaultImageResponseSerializer = nil;
+- (id <AFHPURLResponseSerialization>)imageResponseSerializer {
+    static id <AFHPURLResponseSerialization> _af_defaultImageResponseSerializer = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _af_defaultImageResponseSerializer = [AFImageResponseSerializer serializer];
+        _af_defaultImageResponseSerializer = [AFHPImageResponseSerializer serializer];
     });
 
 #pragma clang diagnostic push
@@ -111,7 +111,7 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
 #pragma clang diagnostic pop
 }
 
-- (void)setImageResponseSerializer:(id <AFURLResponseSerialization>)serializer {
+- (void)setImageResponseSerializer:(id <AFHPURLResponseSerialization>)serializer {
     objc_setAssociatedObject(self, @selector(imageResponseSerializer), serializer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -156,9 +156,9 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
         }
 
         __weak __typeof(self)weakSelf = self;
-        AFHTTPRequestOperation *imageRequestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+        AFHPHTTPRequestOperation *imageRequestOperation = [[AFHPHTTPRequestOperation alloc] initWithRequest:urlRequest];
         imageRequestOperation.responseSerializer = self.imageResponseSerializer;
-        [imageRequestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [imageRequestOperation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if ([[urlRequest URL] isEqual:[operation.request URL]]) {
                 if (success) {
@@ -168,7 +168,7 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
                 }
             }
             [[[strongSelf class] sharedImageCache] cacheImage:responseObject forRequest:urlRequest];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
             if ([[urlRequest URL] isEqual:[operation.response URL]]) {
                 if (failure) {
                     failure(error);
@@ -222,9 +222,9 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
         }
 
         __weak __typeof(self)weakSelf = self;
-        AFHTTPRequestOperation *backgroundImageRequestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+        AFHPHTTPRequestOperation *backgroundImageRequestOperation = [[AFHPHTTPRequestOperation alloc] initWithRequest:urlRequest];
         backgroundImageRequestOperation.responseSerializer = self.imageResponseSerializer;
-        [backgroundImageRequestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [backgroundImageRequestOperation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             if ([[urlRequest URL] isEqual:[operation.request URL]]) {
                 if (success) {
@@ -233,7 +233,7 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
                     [strongSelf setBackgroundImage:responseObject forState:state];
                 }
             }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
             if ([[urlRequest URL] isEqual:[operation.response URL]]) {
                 if (failure) {
                     failure(error);

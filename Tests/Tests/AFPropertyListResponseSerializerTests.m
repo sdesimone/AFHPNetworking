@@ -1,6 +1,6 @@
-// AFPropertyListResponseSerializerTests.m
+// AFHPPropertyListResponseSerializerTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,15 +24,15 @@
 
 #import "AFURLResponseSerialization.h"
 
-@interface AFPropertyListResponseSerializerTests : AFTestCase
-@property (nonatomic, strong) AFPropertyListResponseSerializer *responseSerializer;
+@interface AFHPPropertyListResponseSerializerTests : AFHPTestCase
+@property (nonatomic, strong) AFHPPropertyListResponseSerializer *responseSerializer;
 @end
 
-@implementation AFPropertyListResponseSerializerTests
+@implementation AFHPPropertyListResponseSerializerTests
 
 - (void)setUp {
     [super setUp];
-    self.responseSerializer = [AFPropertyListResponseSerializer serializer];
+    self.responseSerializer = [AFHPPropertyListResponseSerializer serializer];
 }
 
 #pragma mark -

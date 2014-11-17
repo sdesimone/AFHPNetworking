@@ -1,6 +1,6 @@
-// AFNetworkActivityManagerTests.m
+// AFHPNetworkActivityManagerTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,20 +25,20 @@
 #import "AFNetworkActivityIndicatorManager.h"
 #import "AFHTTPRequestOperation.h"
 
-@interface AFNetworkActivityManagerTests : AFTestCase
-@property (nonatomic, strong) AFNetworkActivityIndicatorManager *networkActivityIndicatorManager;
+@interface AFHPNetworkActivityManagerTests : AFHPTestCase
+@property (nonatomic, strong) AFHPNetworkActivityIndicatorManager *networkActivityIndicatorManager;
 @property (nonatomic, assign) BOOL isNetworkActivityIndicatorVisible;
 @property (nonatomic, strong) id mockApplication;
 @end
 
 #pragma mark -
 
-@implementation AFNetworkActivityManagerTests
+@implementation AFHPNetworkActivityManagerTests
 
 - (void)setUp {
     [super setUp];
 
-    self.networkActivityIndicatorManager = [[AFNetworkActivityIndicatorManager alloc] init];
+    self.networkActivityIndicatorManager = [[AFHPNetworkActivityIndicatorManager alloc] init];
     self.networkActivityIndicatorManager.enabled = YES;
 
     self.mockApplication = [OCMockObject mockForClass:[UIApplication class]];
@@ -57,8 +57,8 @@
 
 - (void)testThatNetworkActivityIndicatorTurnsOffIndicatorWhenRequestSucceeds {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/get" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         expect([self.mockApplication isNetworkActivityIndicatorVisible]).will.beFalsy();
     } failure:nil];
     
@@ -69,8 +69,8 @@
 
 - (void)testThatNetworkActivityIndicatorTurnsOffIndicatorWhenRequestFails {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/status/500" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         expect([self.mockApplication isNetworkActivityIndicatorVisible]).will.beFalsy();
     }];
     
@@ -89,7 +89,7 @@
     }] setNetworkActivityIndicatorVisible:YES];
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/get" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:nil failure:nil];
 
     [operation start];

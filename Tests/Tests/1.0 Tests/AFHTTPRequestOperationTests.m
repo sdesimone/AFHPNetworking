@@ -1,6 +1,6 @@
-// AFHTTPRequestOperationTests.m
+// AFHPHTTPRequestOperationTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,14 +22,14 @@
 
 #import "AFNetworkingTests.h"
 
-@interface AFHTTPRequestOperationTests : SenTestCase
+@interface AFHPHTTPRequestOperationTests : SenTestCase
 @property (readwrite, nonatomic, strong) NSURL *baseURL;
 @end
 
-@implementation AFHTTPRequestOperationTests
+@implementation AFHPHTTPRequestOperationTests
 
 - (void)setUp {
-    self.baseURL = [NSURL URLWithString:AFNetworkingTestsBaseURLString];
+    self.baseURL = [NSURL URLWithString:AFHPNetworkingTestsBaseURLString];
 }
 
 #pragma mark -
@@ -38,8 +38,8 @@
     __block id blockResponseObject = nil;
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/get" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         blockResponseObject = responseObject;
     } failure:nil];
 
@@ -52,8 +52,8 @@
     __block NSError *blockError = nil;
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/status/404" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
 
@@ -64,7 +64,7 @@
 
 - (void)testThatCancellationOfRequestOperationSetsError {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/5" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isExecuting]).will.beTruthy();
@@ -78,8 +78,8 @@
     __block NSError *blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/5" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
 
@@ -96,8 +96,8 @@
     __block NSError *blockError = nil;
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/status/500" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -110,7 +110,7 @@
     __block BOOL success;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/redirect/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:nil failure:nil];
     [operation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
         if(redirectResponse){
@@ -130,7 +130,7 @@
     __block NSInteger numberOfRedirects = 0;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/redirect/5" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:nil failure:nil];
     [operation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
         if(redirectResponse){
@@ -150,7 +150,7 @@
 - (void)testThatOperationCanBePaused {
     [Expecta setAsynchronousTestTimeout:3.0];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation start];
     expect([operation isExecuting]).will.beTruthy();
@@ -163,7 +163,7 @@
 - (void)testThatPausedOperationCanBeResumed {
     [Expecta setAsynchronousTestTimeout:3.0];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation start];
     expect([operation isExecuting]).will.beTruthy();
@@ -183,8 +183,8 @@
     __block id blockResponseObject = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         blockResponseObject = responseObject;
     } failure:nil];
 
@@ -204,7 +204,7 @@
 
 - (void)testThatTextStringEncodingIsISOLatin1WhenNoCharsetParameterIsProvided {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=text/plain" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();
@@ -213,7 +213,7 @@
 
 - (void)testThatTextStringEncodingIsShiftJISWhenShiftJISCharsetParameterIsProvided {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=text/plain;%20charset=%22Shift_JIS%22" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();
@@ -222,7 +222,7 @@
 
 - (void)testThatTextStringEncodingIsUTF8WhenInvalidCharsetParameterIsProvided {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=text/plain;%20charset=%22invalid%22" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();
@@ -231,7 +231,7 @@
 
 - (void)testThatTextStringEncodingIsUTF8WhenUTF8CharsetParameterIsProvided {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=text/plain;%20charset=%22UTF-8%22" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();

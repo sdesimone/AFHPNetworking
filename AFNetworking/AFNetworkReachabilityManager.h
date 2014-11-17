@@ -1,6 +1,6 @@
-// AFNetworkReachabilityManager.h
+// AFHPNetworkReachabilityManager.h
 // 
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,11 @@
 #import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
-typedef NS_ENUM(NSInteger, AFNetworkReachabilityStatus) {
-    AFNetworkReachabilityStatusUnknown          = -1,
-    AFNetworkReachabilityStatusNotReachable     = 0,
-    AFNetworkReachabilityStatusReachableViaWWAN = 1,
-    AFNetworkReachabilityStatusReachableViaWiFi = 2,
+typedef NS_ENUM(NSInteger, AFHPNetworkReachabilityStatus) {
+    AFHPNetworkReachabilityStatusUnknown          = -1,
+    AFHPNetworkReachabilityStatusNotReachable     = 0,
+    AFHPNetworkReachabilityStatusReachableViaWWAN = 1,
+    AFHPNetworkReachabilityStatusReachableViaWiFi = 2,
 };
 
 /**
@@ -39,12 +39,12 @@ typedef NS_ENUM(NSInteger, AFNetworkReachabilityStatus) {
  
  @warning Instances of `AFNetworkReachabilityManager` must be started with `-startMonitoring` before reachability status can be determined.
  */
-@interface AFNetworkReachabilityManager : NSObject
+@interface AFHPNetworkReachabilityManager : NSObject
 
 /**
  The current network reachability status.
  */
-@property (readonly, nonatomic, assign) AFNetworkReachabilityStatus networkReachabilityStatus;
+@property (readonly, nonatomic, assign) AFHPNetworkReachabilityStatus networkReachabilityStatus;
 
 /**
  Whether or not the network is currently reachable.
@@ -129,7 +129,7 @@ typedef NS_ENUM(NSInteger, AFNetworkReachabilityStatus) {
 
  @param block A block object to be executed when the network availability of the `baseURL` host changes.. This block has no return value and takes a single argument which represents the various reachability states from the device to the `baseURL`.
  */
-- (void)setReachabilityStatusChangeBlock:(void (^)(AFNetworkReachabilityStatus status))block;
+- (void)setReachabilityStatusChangeBlock:(void (^)(AFHPNetworkReachabilityStatus status))block;
 
 @end
 
@@ -143,10 +143,10 @@ typedef NS_ENUM(NSInteger, AFNetworkReachabilityStatus) {
  The following constants are provided by `AFNetworkReachabilityManager` as possible network reachability statuses.
 
  enum {
- AFNetworkReachabilityStatusUnknown,
- AFNetworkReachabilityStatusNotReachable,
- AFNetworkReachabilityStatusReachableViaWWAN,
- AFNetworkReachabilityStatusReachableViaWiFi,
+ AFHPNetworkReachabilityStatusUnknown,
+ AFHPNetworkReachabilityStatusNotReachable,
+ AFHPNetworkReachabilityStatusReachableViaWWAN,
+ AFHPNetworkReachabilityStatusReachableViaWiFi,
  }
 
  `AFNetworkReachabilityStatusUnknown`
@@ -180,8 +180,8 @@ typedef NS_ENUM(NSInteger, AFNetworkReachabilityStatus) {
 
  @warning In order for network reachability to be monitored, include the `SystemConfiguration` framework in the active target's "Link Binary With Library" build phase, and add `#import <SystemConfiguration/SystemConfiguration.h>` to the header prefix of the project (`Prefix.pch`).
  */
-extern NSString * const AFNetworkingReachabilityDidChangeNotification;
-extern NSString * const AFNetworkingReachabilityNotificationStatusItem;
+extern NSString * const AFHPNetworkingReachabilityDidChangeNotification;
+extern NSString * const AFHPNetworkingReachabilityNotificationStatusItem;
 
 ///--------------------
 /// @name Functions
@@ -190,4 +190,4 @@ extern NSString * const AFNetworkingReachabilityNotificationStatusItem;
 /**
  Returns a localized string representation of an `AFNetworkReachabilityStatus` value.
  */
-extern NSString * AFStringFromNetworkReachabilityStatus(AFNetworkReachabilityStatus status);
+extern NSString * AFHPStringFromNetworkReachabilityStatus(AFHPNetworkReachabilityStatus status);

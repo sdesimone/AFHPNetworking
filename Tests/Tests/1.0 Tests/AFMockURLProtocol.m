@@ -1,6 +1,6 @@
-// AFMockURLProtocol.m
+// AFHPMockURLProtocol.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,19 @@
 
 #import "AFMockURLProtocol.h"
 
-typedef void (^AFTestURLProtocolInitializationCallback)(AFMockURLProtocol *protocol);
+typedef void (^AFHPTestURLProtocolInitializationCallback)(AFHPMockURLProtocol *protocol);
 
 static volatile NSURL *_matchingURL = nil;
-static volatile AFTestURLProtocolInitializationCallback _initializationCallback = nil;
+static volatile AFHPTestURLProtocolInitializationCallback _initializationCallback = nil;
 
-@implementation AFMockURLProtocol
+@implementation AFHPMockURLProtocol
 
 + (void)load {
-    [NSURLProtocol registerClass:[AFMockURLProtocol class]];
+    [NSURLProtocol registerClass:[AFHPMockURLProtocol class]];
 }
 
 + (void)handleNextRequestForURL:(NSURL *)URL
-                     usingBlock:(void (^)(AFMockURLProtocol <AFMockURLProtocolProxy> * protocol))block;
+                     usingBlock:(void (^)(AFHPMockURLProtocol <AFHPMockURLProtocolProxy> * protocol))block;
 {
     _matchingURL = URL;
     _initializationCallback = block;

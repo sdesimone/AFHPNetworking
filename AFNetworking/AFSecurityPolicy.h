@@ -1,6 +1,6 @@
-// AFSecurity.h
+// AFHPSecurity.h
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,10 @@
 #import <Foundation/Foundation.h>
 #import <Security/Security.h>
 
-typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
-    AFSSLPinningModeNone,
-    AFSSLPinningModePublicKey,
-    AFSSLPinningModeCertificate,
+typedef NS_ENUM(NSUInteger, AFHPSSLPinningMode) {
+    AFHPSSLPinningModeNone,
+    AFHPSSLPinningModePublicKey,
+    AFHPSSLPinningModeCertificate,
 };
 
 /**
@@ -34,12 +34,12 @@ typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
  
  Adding pinned SSL certificates to your app helps prevent man-in-the-middle attacks and other vulnerabilities. Applications dealing with sensitive customer data or financial information are strongly encouraged to route all communication over an HTTPS connection with SSL pinning configured and enabled.
  */
-@interface AFSecurityPolicy : NSObject
+@interface AFHPSecurityPolicy : NSObject
 
 /**
  The criteria by which server trust should be evaluated against the pinned SSL certificates. Defaults to `AFSSLPinningModeNone`.
  */
-@property (readonly, nonatomic, assign) AFSSLPinningMode SSLPinningMode;
+@property (readonly, nonatomic, assign) AFHPSSLPinningMode SSLPinningMode;
 
 /**
  Whether to evaluate an entire SSL certificate chain, or just the leaf certificate. Defaults to `YES`.
@@ -83,7 +83,7 @@ typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
  
  @return A new security policy.
  */
-+ (instancetype)policyWithPinningMode:(AFSSLPinningMode)pinningMode;
++ (instancetype)policyWithPinningMode:(AFHPSSLPinningMode)pinningMode;
 
 ///------------------------------
 /// @name Evaluating Server Trust
@@ -127,9 +127,9 @@ typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
  The following constants are provided by `AFSSLPinningMode` as possible SSL pinning modes.
 
  enum {
- AFSSLPinningModeNone,
- AFSSLPinningModePublicKey,
- AFSSLPinningModeCertificate,
+ AFHPSSLPinningModeNone,
+ AFHPSSLPinningModePublicKey,
+ AFHPSSLPinningModeCertificate,
  }
 
  `AFSSLPinningModeNone`

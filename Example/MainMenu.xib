@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">101000</int>
-		<string key="IBDocument.SystemVersion">14A389</string>
+		<string key="IBDocument.SystemVersion">13F34</string>
 		<string key="IBDocument.InterfaceBuilderVersion">6250</string>
-		<string key="IBDocument.AppKitVersion">1343.14</string>
-		<string key="IBDocument.HIToolboxVersion">755.00</string>
+		<string key="IBDocument.AppKitVersion">1265.21</string>
+		<string key="IBDocument.HIToolboxVersion">698.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">6250</string>
@@ -69,7 +69,7 @@
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="238522557">
 									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">About AFNetworking OS X Example</string>
+									<string key="NSTitle">About AFHPNetworking OS X Example</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -115,7 +115,7 @@
 								</object>
 								<object class="NSMenuItem" id="755159360">
 									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">Hide AFNetworking OS X Example</string>
+									<string key="NSTitle">Hide AFHPNetworking OS X Example</string>
 									<string key="NSKeyEquiv">h</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -153,7 +153,7 @@
 								</object>
 								<object class="NSMenuItem" id="632727374">
 									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">Quit AFNetworking OS X Example</string>
+									<string key="NSTitle">Quit AFHPNetworking OS X Example</string>
 									<string key="NSKeyEquiv">q</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -597,7 +597,6 @@
 										<reference key="NSColor" ref="77157331"/>
 									</object>
 									<int key="NScvFlags">4</int>
-									<bool key="NSAutomaticallyAdjustsContentInsets">YES</bool>
 								</object>
 								<object class="NSScroller" id="830874312">
 									<reference key="NSNextResponder" ref="905625827"/>
@@ -607,8 +606,6 @@
 									<reference key="NSNextKeyView" ref="870849666"/>
 									<string key="NSReuseIdentifierKey">_NS:1214</string>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-									<string key="NSControlAction">_doScroller:</string>
-									<reference key="NSControlTarget" ref="905625827"/>
 									<reference key="NSTarget" ref="905625827"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSPercent">0.99815157116451014</double>
@@ -620,8 +617,6 @@
 									<reference key="NSSuperview" ref="905625827"/>
 									<string key="NSReuseIdentifierKey">_NS:1216</string>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-									<string key="NSControlAction">_doScroller:</string>
-									<reference key="NSControlTarget" ref="905625827"/>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="905625827"/>
 									<string key="NSAction">_doScroller:</string>
@@ -645,7 +640,7 @@
 					<string key="NSFrameSize">{331, 500}</string>
 					<reference key="NSNextKeyView" ref="905625827"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1366, 746}}</string>
 				<string key="NSMinSize">{375, 222}</string>
 				<string key="NSMaxSize">{375, 1302}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -1886,8 +1881,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NSMenuCheckmark">{12, 12}</string>
-			<string key="NSMenuMixedState">{10, 2}</string>
+			<string key="NSMenuCheckmark">{11, 11}</string>
+			<string key="NSMenuMixedState">{10, 3}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
 	</data>

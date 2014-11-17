@@ -1,6 +1,6 @@
-// AFHTTPSessionManagerTests.m
+// AFHPHTTPSessionManagerTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,15 +24,15 @@
 
 #import "AFHTTPSessionManager.h"
 
-@interface AFHTTPSessionManagerTests : AFTestCase
-@property (readwrite, nonatomic, strong) AFHTTPSessionManager *manager;
+@interface AFHPHTTPSessionManagerTests : AFHPTestCase
+@property (readwrite, nonatomic, strong) AFHPHTTPSessionManager *manager;
 @end
 
-@implementation AFHTTPSessionManagerTests
+@implementation AFHPHTTPSessionManagerTests
 
 - (void)setUp {
     [super setUp];
-    self.manager = [[AFHTTPSessionManager alloc] initWithBaseURL:self.baseURL];
+    self.manager = [[AFHPHTTPSessionManager alloc] initWithBaseURL:self.baseURL];
 }
 
 - (void)tearDown {

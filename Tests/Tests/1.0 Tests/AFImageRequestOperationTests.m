@@ -1,6 +1,6 @@
-// AFImageRequestOperationTests.m
+// AFHPImageRequestOperationTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,21 +22,21 @@
 
 #import "AFNetworkingTests.h"
 
-@interface AFImageRequestOperationTests : SenTestCase
+@interface AFHPImageRequestOperationTests : SenTestCase
 @property (readwrite, nonatomic, strong) NSURL *baseURL;
 @end
 
-@implementation AFImageRequestOperationTests
+@implementation AFHPImageRequestOperationTests
 
 - (void)setUp {
-    self.baseURL = [NSURL URLWithString:AFNetworkingTestsBaseURLString];
+    self.baseURL = [NSURL URLWithString:AFHPNetworkingTestsBaseURLString];
 }
 
 #pragma mark -
 
 - (void)testThatImageRequestOperationAcceptsTIFFContentType {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=image/tiff" relativeToURL:self.baseURL]];
-    AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:request];
+    AFHPImageRequestOperation *operation = [[AFHPImageRequestOperation alloc] initWithRequest:request];
     [operation start];
 
     expect([operation isFinished]).will.beTruthy();
@@ -45,7 +45,7 @@
 
 - (void)testThatImageRequestOperationAcceptsJPEGContentType {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=image/jpeg" relativeToURL:self.baseURL]];
-    AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:request];
+    AFHPImageRequestOperation *operation = [[AFHPImageRequestOperation alloc] initWithRequest:request];
     [operation start];
 
     expect([operation isFinished]).will.beTruthy();
@@ -54,7 +54,7 @@
 
 - (void)testThatImageRequestOperationAcceptsGIFContentType {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=image/gif" relativeToURL:self.baseURL]];
-    AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:request];
+    AFHPImageRequestOperation *operation = [[AFHPImageRequestOperation alloc] initWithRequest:request];
     [operation start];
 
     expect([operation isFinished]).will.beTruthy();
@@ -63,7 +63,7 @@
 
 - (void)testThatImageRequestOperationAcceptsPNGContentType {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=image/png" relativeToURL:self.baseURL]];
-    AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:request];
+    AFHPImageRequestOperation *operation = [[AFHPImageRequestOperation alloc] initWithRequest:request];
     [operation start];
 
     expect([operation isFinished]).will.beTruthy();
@@ -74,7 +74,7 @@
     NSArray *acceptableIconContentTypes = @[@"image/ico", @"image/x-icon"];
     for (NSString *contentType in acceptableIconContentTypes) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"/response-headers?Content-Type=%@", contentType] relativeToURL:self.baseURL]];
-        AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:request];
+        AFHPImageRequestOperation *operation = [[AFHPImageRequestOperation alloc] initWithRequest:request];
         [operation start];
 
         expect([operation isFinished]).will.beTruthy();
@@ -86,7 +86,7 @@
     NSArray *acceptableBitmapContentTypes = @[@"image/bmp", @"image/x-bmp", @"image/x-xbitmap", @"image/x-win-bitmap"];
     for (NSString *contentType in acceptableBitmapContentTypes) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"/response-headers?Content-Type=%@", contentType] relativeToURL:self.baseURL]];
-        AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:request];
+        AFHPImageRequestOperation *operation = [[AFHPImageRequestOperation alloc] initWithRequest:request];
         [operation start];
 
         expect([operation isFinished]).will.beTruthy();
@@ -96,7 +96,7 @@
 
 - (void)testThatImageRequestOperationDoesNotAcceptInvalidFormatTypes {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=image/invalid" relativeToURL:self.baseURL]];
-    AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:request];
+    AFHPImageRequestOperation *operation = [[AFHPImageRequestOperation alloc] initWithRequest:request];
     [operation start];
 
     expect([operation isFinished]).will.beTruthy();
@@ -105,7 +105,7 @@
 
 - (void)testThatImageResponseIsNotNilWhenRequestSucceeds {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=image/png" relativeToURL:self.baseURL]];
-    AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:request];
+    AFHPImageRequestOperation *operation = [[AFHPImageRequestOperation alloc] initWithRequest:request];
     [operation start];
 
     expect([operation isFinished]).will.beTruthy();
@@ -114,7 +114,7 @@
 
 - (void)testThatImageResponseIsNilWhenRequestFails {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/status/404" relativeToURL:self.baseURL]];
-    AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:request];
+    AFHPImageRequestOperation *operation = [[AFHPImageRequestOperation alloc] initWithRequest:request];
     [operation start];
 
     expect([operation isFinished]).will.beTruthy();
@@ -125,7 +125,7 @@
     __block BOOL imageProcessingBlockExecuted = NO;
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=image/png" relativeToURL:self.baseURL]];
-    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
+    AFHPImageRequestOperation *operation = [AFHPImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
         imageProcessingBlockExecuted = YES;
         return image;
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -142,7 +142,7 @@
     __block UIImage *blockImage = nil;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/status/404" relativeToURL:self.baseURL]];
 
-    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
+    AFHPImageRequestOperation *operation = [AFHPImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
         blockImage = [[UIImage alloc] init];
         return blockImage;
     } success:nil failure:nil];

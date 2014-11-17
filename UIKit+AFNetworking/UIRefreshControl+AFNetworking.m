@@ -1,6 +1,6 @@
 // UIRefreshControl+AFNetworking.m
 //
-// Copyright (c) 2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,15 +30,15 @@
 #import "AFURLSessionManager.h"
 #endif
 
-@implementation UIRefreshControl (AFNetworking)
+@implementation UIRefreshControl (AFHPNetworking)
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 - (void)setRefreshingWithStateOfTask:(NSURLSessionTask *)task {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 
-    [notificationCenter removeObserver:self name:AFNetworkingTaskDidResumeNotification object:nil];
-    [notificationCenter removeObserver:self name:AFNetworkingTaskDidSuspendNotification object:nil];
-    [notificationCenter removeObserver:self name:AFNetworkingTaskDidCompleteNotification object:nil];
+    [notificationCenter removeObserver:self name:AFHPNetworkingTaskDidResumeNotification object:nil];
+    [notificationCenter removeObserver:self name:AFHPNetworkingTaskDidSuspendNotification object:nil];
+    [notificationCenter removeObserver:self name:AFHPNetworkingTaskDidCompleteNotification object:nil];
 
     if (task) {
         if (task.state != NSURLSessionTaskStateCompleted) {
@@ -48,19 +48,19 @@
                 [self endRefreshing];
             }
 
-            [notificationCenter addObserver:self selector:@selector(af_beginRefreshing) name:AFNetworkingTaskDidResumeNotification object:task];
-            [notificationCenter addObserver:self selector:@selector(af_endRefreshing) name:AFNetworkingTaskDidCompleteNotification object:task];
-            [notificationCenter addObserver:self selector:@selector(af_endRefreshing) name:AFNetworkingTaskDidSuspendNotification object:task];
+            [notificationCenter addObserver:self selector:@selector(af_beginRefreshing) name:AFHPNetworkingTaskDidResumeNotification object:task];
+            [notificationCenter addObserver:self selector:@selector(af_endRefreshing) name:AFHPNetworkingTaskDidCompleteNotification object:task];
+            [notificationCenter addObserver:self selector:@selector(af_endRefreshing) name:AFHPNetworkingTaskDidSuspendNotification object:task];
         }
     }
 }
 #endif
 
-- (void)setRefreshingWithStateOfOperation:(AFURLConnectionOperation *)operation {
+- (void)setRefreshingWithStateOfOperation:(AFHPURLConnectionOperation *)operation {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 
-    [notificationCenter removeObserver:self name:AFNetworkingOperationDidStartNotification object:nil];
-    [notificationCenter removeObserver:self name:AFNetworkingOperationDidFinishNotification object:nil];
+    [notificationCenter removeObserver:self name:AFHPNetworkingOperationDidStartNotification object:nil];
+    [notificationCenter removeObserver:self name:AFHPNetworkingOperationDidFinishNotification object:nil];
 
     if (operation) {
         if (![operation isFinished]) {
@@ -70,8 +70,8 @@
                 [self endRefreshing];
             }
 
-            [notificationCenter addObserver:self selector:@selector(af_beginRefreshing) name:AFNetworkingOperationDidStartNotification object:operation];
-            [notificationCenter addObserver:self selector:@selector(af_endRefreshing) name:AFNetworkingOperationDidFinishNotification object:operation];
+            [notificationCenter addObserver:self selector:@selector(af_beginRefreshing) name:AFHPNetworkingOperationDidStartNotification object:operation];
+            [notificationCenter addObserver:self selector:@selector(af_endRefreshing) name:AFHPNetworkingOperationDidFinishNotification object:operation];
         }
     }
 }

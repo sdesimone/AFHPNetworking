@@ -1,6 +1,6 @@
 // UIAlertView+AFNetworking.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 #import "AFURLSessionManager.h"
 #endif
 
-static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __autoreleasing *title, NSString * __autoreleasing *message) {
+static void AFHPGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __autoreleasing *title, NSString * __autoreleasing *message) {
     if (error.localizedDescription && (error.localizedRecoverySuggestion || error.localizedFailureReason)) {
         *title = error.localizedDescription;
 
@@ -48,7 +48,7 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
     }
 }
 
-@implementation UIAlertView (AFNetworking)
+@implementation UIAlertView (AFHPNetworking)
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 + (void)showAlertViewForTaskWithErrorOnCompletion:(NSURLSessionTask *)task
@@ -62,47 +62,47 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
                                 cancelButtonTitle:(NSString *)cancelButtonTitle
                                 otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION
 {
-    __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingTaskDidCompleteNotification object:task queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
+    __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFHPNetworkingTaskDidCompleteNotification object:task queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 
-        NSError *error = notification.userInfo[AFNetworkingTaskDidCompleteErrorKey];
+        NSError *error = notification.userInfo[AFHPNetworkingTaskDidCompleteErrorKey];
         if (error) {
             NSString *title, *message;
-            AFGetAlertViewTitleAndMessageFromError(error, &title, &message);
+            AFHPGetAlertViewTitleAndMessageFromError(error, &title, &message);
 
             [[[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil] show];
         }
 
-        [[NSNotificationCenter defaultCenter] removeObserver:observer name:AFNetworkingTaskDidCompleteNotification object:notification.object];
+        [[NSNotificationCenter defaultCenter] removeObserver:observer name:AFHPNetworkingTaskDidCompleteNotification object:notification.object];
     }];
 }
 #endif
 
 #pragma mark -
 
-+ (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFURLConnectionOperation *)operation
++ (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFHPURLConnectionOperation *)operation
                                                      delegate:(id)delegate
 {
     [self showAlertViewForRequestOperationWithErrorOnCompletion:operation delegate:delegate cancelButtonTitle:NSLocalizedStringFromTable(@"Dismiss", @"AFNetworking", @"UIAlert View Cancel Button Title") otherButtonTitles:nil, nil];
 }
 
-+ (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFURLConnectionOperation *)operation
++ (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFHPURLConnectionOperation *)operation
                                                      delegate:(id)delegate
                                             cancelButtonTitle:(NSString *)cancelButtonTitle
                                             otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION
 {
-    __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingOperationDidFinishNotification object:operation queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
+    __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFHPNetworkingOperationDidFinishNotification object:operation queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 
-        if (notification.object && [notification.object isKindOfClass:[AFURLConnectionOperation class]]) {
-            NSError *error = [(AFURLConnectionOperation *)notification.object error];
+        if (notification.object && [notification.object isKindOfClass:[AFHPURLConnectionOperation class]]) {
+            NSError *error = [(AFHPURLConnectionOperation *)notification.object error];
             if (error) {
                 NSString *title, *message;
-                AFGetAlertViewTitleAndMessageFromError(error, &title, &message);
+                AFHPGetAlertViewTitleAndMessageFromError(error, &title, &message);
 
                 [[[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil] show];
             }
         }
 
-        [[NSNotificationCenter defaultCenter] removeObserver:observer name:AFNetworkingOperationDidFinishNotification object:notification.object];
+        [[NSNotificationCenter defaultCenter] removeObserver:observer name:AFHPNetworkingOperationDidFinishNotification object:notification.object];
     }];
 }
 

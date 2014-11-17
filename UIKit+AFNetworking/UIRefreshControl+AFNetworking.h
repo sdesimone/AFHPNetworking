@@ -1,6 +1,6 @@
 // UIRefreshControl+AFNetworking.m
 //
-// Copyright (c) 2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,12 +28,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class AFURLConnectionOperation;
+@class AFHPURLConnectionOperation;
 
 /**
  This category adds methods to the UIKit framework's `UIRefreshControl` class. The methods in this category provide support for automatically begining and ending refreshing depending on the loading state of a request operation or session task.
  */
-@interface UIRefreshControl (AFNetworking)
+@interface UIRefreshControl (AFHPNetworking)
 
 ///-----------------------------------
 /// @name Refreshing for Session Tasks
@@ -57,7 +57,7 @@
 
  @param operation The operation. If `nil`, automatic updating from any previously specified operation will be disabled.
  */
-- (void)setRefreshingWithStateOfOperation:(AFURLConnectionOperation *)operation;
+- (void)setRefreshingWithStateOfOperation:(AFHPURLConnectionOperation *)operation;
 
 @end
 

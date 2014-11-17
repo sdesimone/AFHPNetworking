@@ -1,6 +1,6 @@
-// AFJSONSerializationTests.m
+// AFHPJSONSerializationTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,20 +25,20 @@
 #import "AFURLRequestSerialization.h"
 #import "AFURLResponseSerialization.h"
 
-static NSData * AFJSONTestData() {
+static NSData * AFHPJSONTestData() {
     return [NSJSONSerialization dataWithJSONObject:@{@"foo": @"bar"} options:0 error:nil];
 }
 
 #pragma mark -
 
-@interface AFJSONRequestSerializationTests : AFTestCase
-@property (nonatomic, strong) AFJSONRequestSerializer *requestSerializer;
+@interface AFHPJSONRequestSerializationTests : AFHPTestCase
+@property (nonatomic, strong) AFHPJSONRequestSerializer *requestSerializer;
 @end
 
-@implementation AFJSONRequestSerializationTests
+@implementation AFHPJSONRequestSerializationTests
 
 - (void)setUp {
-    self.requestSerializer = [[AFJSONRequestSerializer alloc] init];
+    self.requestSerializer = [[AFHPJSONRequestSerializer alloc] init];
 }
 
 #pragma mark -
@@ -46,7 +46,7 @@ static NSData * AFJSONTestData() {
 - (void)testThatJSONRequestSerializationHandlesParametersDictionary {
     NSDictionary *parameters = @{@"key":@"value"};
     NSError *error = nil;
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:AFNetworkingTestsBaseURLString parameters:parameters error:&error];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:AFHPNetworkingTestsBaseURLString parameters:parameters error:&error];
 
     XCTAssertNil(error, @"Serialization error should be nil");
 
@@ -58,7 +58,7 @@ static NSData * AFJSONTestData() {
 - (void)testThatJSONRequestSerializationHandlesParametersArray {
     NSArray *parameters = @[@{@"key":@"value"}];
     NSError *error = nil;
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:AFNetworkingTestsBaseURLString parameters:parameters error:&error];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:AFHPNetworkingTestsBaseURLString parameters:parameters error:&error];
 
     XCTAssertNil(error, @"Serialization error should be nil");
 
@@ -71,15 +71,15 @@ static NSData * AFJSONTestData() {
 
 #pragma mark -
 
-@interface AFJSONResponseSerializationTests : AFTestCase
-@property (nonatomic, strong) AFJSONResponseSerializer *responseSerializer;
+@interface AFHPJSONResponseSerializationTests : AFHPTestCase
+@property (nonatomic, strong) AFHPJSONResponseSerializer *responseSerializer;
 @end
 
-@implementation AFJSONResponseSerializationTests
+@implementation AFHPJSONResponseSerializationTests
 
 - (void)setUp {
     [super setUp];
-    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    self.responseSerializer = [AFHPJSONResponseSerializer serializer];
 }
 
 #pragma mark -
@@ -88,7 +88,7 @@ static NSData * AFJSONTestData() {
     NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:self.baseURL statusCode:200 HTTPVersion:@"1.1" headerFields:@{@"Content-Type": @"application/json"}];
 
     NSError *error = nil;
-    [self.responseSerializer validateResponse:response data:AFJSONTestData() error:&error];
+    [self.responseSerializer validateResponse:response data:AFHPJSONTestData() error:&error];
 
     XCTAssertNil(error, @"Error handling application/json");
 }
@@ -96,7 +96,7 @@ static NSData * AFJSONTestData() {
 - (void)testThatJSONResponseSerializerAcceptsTextJSONMimeType {
     NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:self.baseURL statusCode:200 HTTPVersion:@"1.1" headerFields:@{@"Content-Type": @"text/json"}];
     NSError *error = nil;
-    [self.responseSerializer validateResponse:response data:AFJSONTestData()error:&error];
+    [self.responseSerializer validateResponse:response data:AFHPJSONTestData()error:&error];
 
     XCTAssertNil(error, @"Error handling text/json");
 }
@@ -104,7 +104,7 @@ static NSData * AFJSONTestData() {
 - (void)testThatJSONResponseSerializerAcceptsTextJavaScriptMimeType {
     NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:self.baseURL statusCode:200 HTTPVersion:@"1.1" headerFields:@{@"Content-Type": @"text/javascript"}];
     NSError *error = nil;
-    [self.responseSerializer validateResponse:response data:AFJSONTestData() error:&error];
+    [self.responseSerializer validateResponse:response data:AFHPJSONTestData() error:&error];
 
     XCTAssertNil(error, @"Error handling text/javascript");
 }
@@ -112,7 +112,7 @@ static NSData * AFJSONTestData() {
 - (void)testThatJSONResponseSerializerDoesNotAcceptNonStandardJSONMimeType {
     NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:self.baseURL statusCode:200 HTTPVersion:@"1.1" headerFields:@{@"Content-Type": @"nonstandard/json"}];
     NSError *error = nil;
-    [self.responseSerializer validateResponse:response data:AFJSONTestData() error:&error];
+    [self.responseSerializer validateResponse:response data:AFHPJSONTestData() error:&error];
 
     XCTAssertNotNil(error, @"Error should have been thrown for nonstandard/json");
 }
@@ -120,7 +120,7 @@ static NSData * AFJSONTestData() {
 - (void)testThatJSONResponseSerializerReturnsDictionaryForValidJSONDictionary {
     NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:self.baseURL statusCode:200 HTTPVersion:@"1.1" headerFields:@{@"Content-Type": @"text/json"}];
     NSError *error = nil;
-    id responseObject = [self.responseSerializer responseObjectForResponse:response data:AFJSONTestData() error:&error];
+    id responseObject = [self.responseSerializer responseObjectForResponse:response data:AFHPJSONTestData() error:&error];
 
     XCTAssertNil(error, @"Serialization error should be nil");
     XCTAssert([responseObject isKindOfClass:[NSDictionary class]], @"Expected response to be a NSDictionary");

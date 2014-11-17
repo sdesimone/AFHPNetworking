@@ -1,6 +1,6 @@
-// AFJSONRequestOperationTests.m
+// AFHPJSONRequestOperationTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,19 @@
 
 #import "AFNetworkingTests.h"
 
-@interface AFJSONRequestOperationTests : SenTestCase
+@interface AFHPJSONRequestOperationTests : SenTestCase
 @property (readwrite, nonatomic, strong) NSURL *baseURL;
 @end
 
-@implementation AFJSONRequestOperationTests
+@implementation AFHPJSONRequestOperationTests
 
 - (void)setUp {
-    self.baseURL = [NSURL URLWithString:AFNetworkingTestsBaseURLString];
+    self.baseURL = [NSURL URLWithString:AFHPNetworkingTestsBaseURLString];
 }
 
 - (void)testThatJSONRequestOperationAcceptsApplicationJSON {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=application/json" relativeToURL:self.baseURL]];
-    AFJSONRequestOperation *operation = [[AFJSONRequestOperation alloc] initWithRequest:request];
+    AFHPJSONRequestOperation *operation = [[AFHPJSONRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();
@@ -43,7 +43,7 @@
 
 - (void)testThatJSONRequestOperationAcceptsTextJSON {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=text/json" relativeToURL:self.baseURL]];
-    AFJSONRequestOperation *operation = [[AFJSONRequestOperation alloc] initWithRequest:request];
+    AFHPJSONRequestOperation *operation = [[AFHPJSONRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();
@@ -52,7 +52,7 @@
 
 - (void)testThatJSONRequestOperationAcceptsTextJavascript {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=text/javascript" relativeToURL:self.baseURL]];
-    AFJSONRequestOperation *operation = [[AFJSONRequestOperation alloc] initWithRequest:request];
+    AFHPJSONRequestOperation *operation = [[AFHPJSONRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();
@@ -60,9 +60,9 @@
 }
 
 - (void)testThatJSONRequestOperationAcceptsCustomContentType {
-    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"application/customjson"]];
+    [AFHPJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"application/customjson"]];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=application/customjson" relativeToURL:self.baseURL]];
-    AFJSONRequestOperation *operation = [[AFJSONRequestOperation alloc] initWithRequest:request];
+    AFHPJSONRequestOperation *operation = [[AFHPJSONRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();
@@ -71,7 +71,7 @@
 
 - (void)testThatJSONRequestOperationDoesNotAcceptInvalidContentType {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=application/no-json" relativeToURL:self.baseURL]];
-    AFJSONRequestOperation *operation = [[AFJSONRequestOperation alloc] initWithRequest:request];
+    AFHPJSONRequestOperation *operation = [[AFHPJSONRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();
@@ -80,7 +80,7 @@
 
 - (void)testThatJSONResponseObjectIsNotNilWhenValidJSONIsReturned {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/response-headers?Content-Type=application/json" relativeToURL:self.baseURL]];
-    AFJSONRequestOperation *operation = [[AFJSONRequestOperation alloc] initWithRequest:request];
+    AFHPJSONRequestOperation *operation = [[AFHPJSONRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();
@@ -89,7 +89,7 @@
 
 - (void)testThatJSONResponseObjectIsNilWhenErrorOccurs {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/status/404" relativeToURL:self.baseURL]];
-    AFJSONRequestOperation *operation = [[AFJSONRequestOperation alloc] initWithRequest:request];
+    AFHPJSONRequestOperation *operation = [[AFHPJSONRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isFinished]).will.beTruthy();

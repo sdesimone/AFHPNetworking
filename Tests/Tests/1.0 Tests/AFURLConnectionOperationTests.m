@@ -1,6 +1,6 @@
-// AFJSONRequestOperationTests.m
+// AFHPJSONRequestOperationTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,31 @@
 #import "AFURLConnectionOperation.h"
 #import "AFMockURLProtocol.h"
 
-@interface AFURLConnectionOperationTests : SenTestCase
+@interface AFHPURLConnectionOperationTests : SenTestCase
 @property (readwrite, nonatomic, strong) NSURL *baseURL;
 @end
 
-@implementation AFURLConnectionOperationTests
+@implementation AFHPURLConnectionOperationTests
 
 - (void)setUp {
-    self.baseURL = [NSURL URLWithString:AFNetworkingTestsBaseURLString];
+    self.baseURL = [NSURL URLWithString:AFHPNetworkingTestsBaseURLString];
 }
 
 #pragma mark -
 
 - (void)testThatAFURLConnectionOperationInvokesWillSendRequestForAuthenticationChallengeBlock {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/path" relativeToURL:self.baseURL]];
-    AFURLConnectionOperation *operation = [[AFURLConnectionOperation alloc] initWithRequest:request];
+    AFHPURLConnectionOperation *operation = [[AFHPURLConnectionOperation alloc] initWithRequest:request];
     
     __block BOOL willSendRequestForAuthenticationChallengeBlockInvoked = NO;
     [operation setWillSendRequestForAuthenticationChallengeBlock:^(NSURLConnection *connection, NSURLAuthenticationChallenge *challenge) {
         willSendRequestForAuthenticationChallengeBlockInvoked = YES;
     }];
     
-    [AFMockURLProtocol handleNextRequestForURL:request.URL usingBlock:^(AFMockURLProtocol <AFMockURLProtocolProxy> * protocol) {
+    [AFHPMockURLProtocol handleNextRequestForURL:request.URL usingBlock:^(AFHPMockURLProtocol <AFHPMockURLProtocolProxy> * protocol) {
         
         void(^startOperation)(NSInvocation *invocation) = ^(NSInvocation *invocation) {
-            __unsafe_unretained AFMockURLProtocol *protocol = nil;
+            __unsafe_unretained AFHPMockURLProtocol *protocol = nil;
             [invocation getArgument:&protocol atIndex:0];
             
             NSURLProtectionSpace *protectionSpace = [[NSURLProtectionSpace alloc] initWithHost:request.URL.host port:request.URL.port.integerValue protocol:request.URL.scheme realm:nil authenticationMethod:NSURLAuthenticationMethodDefault];
@@ -66,8 +66,8 @@
 
 - (void)testThatAFURLConnectionOperationTrustsPinnedCertificates {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/path" relativeToURL:self.baseURL]];
-    AFURLConnectionOperation *operation = [[AFURLConnectionOperation alloc] initWithRequest:request];
-    operation.SSLPinningMode = AFSSLPinningModeCertificate;
+    AFHPURLConnectionOperation *operation = [[AFHPURLConnectionOperation alloc] initWithRequest:request];
+    operation.SSLPinningMode = AFHPSSLPinningModeCertificate;
     
     __block BOOL useCredentialInvoked = NO;
     
@@ -97,7 +97,7 @@
         [invocation setReturnValue:(void *)&trust];
     }] serverTrust];
     
-    AFMockURLProtocol *protocol = [[AFMockURLProtocol alloc] initWithRequest:request cachedResponse:nil client:nil];
+    AFHPMockURLProtocol *protocol = [[AFHPMockURLProtocol alloc] initWithRequest:request cachedResponse:nil client:nil];
     id mockedProtocol = [OCMockObject partialMockForObject:protocol];
     
     void(^useCredential)(NSInvocation *invocation) = ^(NSInvocation *invocation) {
@@ -122,8 +122,8 @@
 
 - (void)testThatAFURLConnectionOperationTrustsPinnedPublicKeys {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/path" relativeToURL:self.baseURL]];
-    AFURLConnectionOperation *operation = [[AFURLConnectionOperation alloc] initWithRequest:request];
-    operation.SSLPinningMode = AFSSLPinningModePublicKey;
+    AFHPURLConnectionOperation *operation = [[AFHPURLConnectionOperation alloc] initWithRequest:request];
+    operation.SSLPinningMode = AFHPSSLPinningModePublicKey;
     
     __block BOOL useCredentialInvoked = NO;
     
@@ -153,7 +153,7 @@
         [invocation setReturnValue:(void *)&trust];
     }] serverTrust];
     
-    AFMockURLProtocol *protocol = [[AFMockURLProtocol alloc] initWithRequest:request cachedResponse:nil client:nil];
+    AFHPMockURLProtocol *protocol = [[AFHPMockURLProtocol alloc] initWithRequest:request cachedResponse:nil client:nil];
     id mockedProtocol = [OCMockObject partialMockForObject:protocol];
     
     void(^useCredential)(NSInvocation *invocation) = ^(NSInvocation *invocation) {
@@ -178,8 +178,8 @@
 
 - (void)testThatAFURLConnectionOperationTrustsPublicKeysOfDerivedCertificates {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/path" relativeToURL:self.baseURL]];
-    AFURLConnectionOperation *operation = [[AFURLConnectionOperation alloc] initWithRequest:request];
-    operation.SSLPinningMode = AFSSLPinningModePublicKey;
+    AFHPURLConnectionOperation *operation = [[AFHPURLConnectionOperation alloc] initWithRequest:request];
+    operation.SSLPinningMode = AFHPSSLPinningModePublicKey;
     
     __block BOOL useCredentialInvoked = NO;
     
@@ -215,7 +215,7 @@
         [invocation setReturnValue:(void *)&trust];
     }] serverTrust];
     
-    AFMockURLProtocol *protocol = [[AFMockURLProtocol alloc] initWithRequest:request cachedResponse:nil client:nil];
+    AFHPMockURLProtocol *protocol = [[AFHPMockURLProtocol alloc] initWithRequest:request cachedResponse:nil client:nil];
     id mockedProtocol = [OCMockObject partialMockForObject:protocol];
     
     void(^useCredential)(NSInvocation *invocation) = ^(NSInvocation *invocation) {
@@ -241,8 +241,8 @@
 
 - (void)testThatAFURLConnectionOperationTrustsDerivedCertificates {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/path" relativeToURL:self.baseURL]];
-    AFURLConnectionOperation *operation = [[AFURLConnectionOperation alloc] initWithRequest:request];
-    operation.SSLPinningMode = AFSSLPinningModeCertificate;
+    AFHPURLConnectionOperation *operation = [[AFHPURLConnectionOperation alloc] initWithRequest:request];
+    operation.SSLPinningMode = AFHPSSLPinningModeCertificate;
     
     __block BOOL useCredentialInvoked = NO;
     
@@ -278,7 +278,7 @@
         [invocation setReturnValue:(void *)&trust];
     }] serverTrust];
     
-    AFMockURLProtocol *protocol = [[AFMockURLProtocol alloc] initWithRequest:request cachedResponse:nil client:nil];
+    AFHPMockURLProtocol *protocol = [[AFHPMockURLProtocol alloc] initWithRequest:request cachedResponse:nil client:nil];
     id mockedProtocol = [OCMockObject partialMockForObject:protocol];
     
     void(^useCredential)(NSInvocation *invocation) = ^(NSInvocation *invocation) {

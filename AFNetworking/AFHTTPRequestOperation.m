@@ -1,6 +1,6 @@
-// AFHTTPRequestOperation.m
+// AFHPHTTPRequestOperation.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,19 +44,19 @@ static dispatch_group_t http_request_operation_completion_group() {
 
 #pragma mark -
 
-@interface AFURLConnectionOperation ()
+@interface AFHPURLConnectionOperation ()
 @property (readwrite, nonatomic, strong) NSURLRequest *request;
 @property (readwrite, nonatomic, strong) NSURLResponse *response;
 @end
 
-@interface AFHTTPRequestOperation ()
+@interface AFHPHTTPRequestOperation ()
 @property (readwrite, nonatomic, strong) NSHTTPURLResponse *response;
 @property (readwrite, nonatomic, strong) id responseObject;
 @property (readwrite, nonatomic, strong) NSError *responseSerializationError;
 @property (readwrite, nonatomic, strong) NSRecursiveLock *lock;
 @end
 
-@implementation AFHTTPRequestOperation
+@implementation AFHPHTTPRequestOperation
 @dynamic lock;
 
 - (instancetype)initWithRequest:(NSURLRequest *)urlRequest {
@@ -65,12 +65,12 @@ static dispatch_group_t http_request_operation_completion_group() {
         return nil;
     }
 
-    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    self.responseSerializer = [AFHPHTTPResponseSerializer serializer];
 
     return self;
 }
 
-- (void)setResponseSerializer:(AFHTTPResponseSerializer <AFURLResponseSerialization> *)responseSerializer {
+- (void)setResponseSerializer:(AFHPHTTPResponseSerializer <AFHPURLResponseSerialization> *)responseSerializer {
     NSParameterAssert(responseSerializer);
 
     [self.lock lock];
@@ -102,12 +102,12 @@ static dispatch_group_t http_request_operation_completion_group() {
     }
 }
 
-#pragma mark - AFHTTPRequestOperation
+#pragma mark - AFHPHTTPRequestOperation
 
-- (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (void)setCompletionBlockWithSuccess:(void (^)(AFHPHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHPHTTPRequestOperation *operation, NSError *error))failure
 {
-    // completionBlock is manually nilled out in AFURLConnectionOperation to break the retain cycle.
+    // completionBlock is manually nilled out in AFHPURLConnectionOperation to break the retain cycle.
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
 #pragma clang diagnostic ignored "-Wgnu"
@@ -148,7 +148,7 @@ static dispatch_group_t http_request_operation_completion_group() {
 #pragma clang diagnostic pop
 }
 
-#pragma mark - AFURLRequestOperation
+#pragma mark - AFHPURLRequestOperation
 
 - (void)pause {
     [super pause];
@@ -180,7 +180,7 @@ static dispatch_group_t http_request_operation_completion_group() {
         return nil;
     }
 
-    self.responseSerializer = [decoder decodeObjectOfClass:[AFHTTPResponseSerializer class] forKey:NSStringFromSelector(@selector(responseSerializer))];
+    self.responseSerializer = [decoder decodeObjectOfClass:[AFHPHTTPResponseSerializer class] forKey:NSStringFromSelector(@selector(responseSerializer))];
 
     return self;
 }
@@ -194,7 +194,7 @@ static dispatch_group_t http_request_operation_completion_group() {
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone {
-    AFHTTPRequestOperation *operation = [super copyWithZone:zone];
+    AFHPHTTPRequestOperation *operation = [super copyWithZone:zone];
 
     operation.responseSerializer = [self.responseSerializer copyWithZone:zone];
     operation.completionQueue = self.completionQueue;

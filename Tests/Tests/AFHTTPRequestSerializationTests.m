@@ -1,6 +1,6 @@
-// AFHTTPSerializationTests.m
+// AFHPHTTPSerializationTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,18 +24,18 @@
 
 #import "AFURLRequestSerialization.h"
 
-@interface AFMultipartBodyStream : NSInputStream <NSStreamDelegate>
+@interface AFHPMultipartBodyStream : NSInputStream <NSStreamDelegate>
 @property (readwrite, nonatomic, strong) NSMutableArray *HTTPBodyParts;
 @end
 
-@protocol AFMultipartFormDataTest <AFMultipartFormData>
-@property (readwrite, nonatomic, strong) AFMultipartBodyStream *bodyStream;
+@protocol AFHPMultipartFormDataTest <AFHPMultipartFormData>
+@property (readwrite, nonatomic, strong) AFHPMultipartBodyStream *bodyStream;
 
 - (instancetype)initWithURLRequest:(NSMutableURLRequest *)urlRequest
                     stringEncoding:(NSStringEncoding)encoding;
 @end
 
-@interface AFHTTPBodyPart : NSObject
+@interface AFHPHTTPBodyPart : NSObject
 @property (nonatomic, assign) NSStringEncoding stringEncoding;
 @property (nonatomic, strong) NSDictionary *headers;
 @property (nonatomic, copy) NSString *boundary;
@@ -53,15 +53,15 @@
 
 #pragma mark -
 
-@interface AFHTTPRequestSerializationTests : AFTestCase
-@property (nonatomic, strong) AFHTTPRequestSerializer *requestSerializer;
+@interface AFHPHTTPRequestSerializationTests : AFHPTestCase
+@property (nonatomic, strong) AFHPHTTPRequestSerializer *requestSerializer;
 @end
 
-@implementation AFHTTPRequestSerializationTests
+@implementation AFHPHTTPRequestSerializationTests
 
 - (void)setUp {
     [super setUp];
-    self.requestSerializer = [AFHTTPRequestSerializer serializer];
+    self.requestSerializer = [AFHPHTTPRequestSerializer serializer];
 }
 
 #pragma mark -
@@ -106,13 +106,13 @@
 - (void)testThatAFHTTPRequestSerialiationSerializesMIMETypeCorrectly {
     NSMutableURLRequest *originalRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://example.com"]];
     Class streamClass = NSClassFromString(@"AFStreamingMultipartFormData");
-    id <AFMultipartFormDataTest> formData = [[streamClass alloc] initWithURLRequest:originalRequest stringEncoding:NSUTF8StringEncoding];
+    id <AFHPMultipartFormDataTest> formData = [[streamClass alloc] initWithURLRequest:originalRequest stringEncoding:NSUTF8StringEncoding];
     
     NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"adn_0" ofType:@"cer"]];
     
     [formData appendPartWithFileURL:fileURL name:@"test" error:NULL];
     
-    AFHTTPBodyPart *part = [formData.bodyStream.HTTPBodyParts firstObject];
+    AFHPHTTPBodyPart *part = [formData.bodyStream.HTTPBodyParts firstObject];
     
     XCTAssertTrue([part.headers[@"Content-Type"] isEqualToString:@"application/x-x509-ca-cert"], @"MIME Type has not been obtained correctly (%@)", part.headers[@"Content-Type"]);
 }
@@ -133,7 +133,7 @@
 }
 
 - (void)testQueryStringSerializationCanFailWithError {
-    AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
+    AFHPHTTPRequestSerializer *serializer = [AFHPHTTPRequestSerializer serializer];
 
     NSError *serializerError = [NSError errorWithDomain:@"TestDomain" code:0 userInfo:nil];
 

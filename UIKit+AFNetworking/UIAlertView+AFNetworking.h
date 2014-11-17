@@ -1,6 +1,6 @@
 // UIAlertView+AFNetworking.h
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,12 +28,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class AFURLConnectionOperation;
+@class AFHPURLConnectionOperation;
 
 /**
  This category adds methods to the UIKit framework's `UIAlertView` class. The methods in this category provide support for automatically showing an alert if a session task or request operation finishes with an error. Alert title and message are filled from the corresponding `localizedDescription` & `localizedRecoverySuggestion` or `localizedFailureReason` of the error.
  */
-@interface UIAlertView (AFNetworking)
+@interface UIAlertView (AFHPNetworking)
 
 ///-------------------------------------
 /// @name Showing Alert for Session Task
@@ -75,7 +75,7 @@
  @param operation The request operation.
  @param delegate The alert view delegate.
  */
-+ (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFURLConnectionOperation *)operation
++ (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFHPURLConnectionOperation *)operation
                                                      delegate:(id)delegate;
 
 /**
@@ -86,7 +86,7 @@
  @param cancelButtonTitle The title of the cancel button or nil if there is no cancel button. Using this argument is equivalent to setting the cancel button index to the value returned by invoking addButtonWithTitle: specifying this title.
  @param otherButtonTitles The title of another button. Using this argument is equivalent to invoking addButtonWithTitle: with this title to add more buttons. Too many buttons can cause the alert view to scroll. For guidelines on the best ways to use an alert in an app, see "Temporary Views". Titles of additional buttons to add to the receiver, terminated with `nil`.
  */
-+ (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFURLConnectionOperation *)operation
++ (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFHPURLConnectionOperation *)operation
                                                      delegate:(id)delegate
                                             cancelButtonTitle:(NSString *)cancelButtonTitle
                                             otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;

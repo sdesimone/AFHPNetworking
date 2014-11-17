@@ -1,6 +1,6 @@
-// AFSerialization.h
+// AFHPSerialization.h
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 
  For example, a JSON response serializer may check for an acceptable status code (`2XX` range) and content type (`application/json`), decoding a valid JSON response into an object.
  */
-@protocol AFURLResponseSerialization <NSObject, NSSecureCoding, NSCopying>
+@protocol AFHPURLResponseSerialization <NSObject, NSSecureCoding, NSCopying>
 
 /**
  The response object decoded from the data associated with a specified response.
@@ -52,7 +52,7 @@
 
  Any request or response serializer dealing with HTTP is encouraged to subclass `AFHTTPResponseSerializer` in order to ensure consistent default behavior.
  */
-@interface AFHTTPResponseSerializer : NSObject <AFURLResponseSerialization>
+@interface AFHPHTTPResponseSerializer : NSObject <AFHPURLResponseSerialization>
 
 - (instancetype) init;
 
@@ -111,7 +111,7 @@
  - `text/json`
  - `text/javascript`
  */
-@interface AFJSONResponseSerializer : AFHTTPResponseSerializer
+@interface AFHPJSONResponseSerializer : AFHPHTTPResponseSerializer
 
 - (instancetype) init;
 
@@ -144,7 +144,7 @@
  - `application/xml`
  - `text/xml`
  */
-@interface AFXMLParserResponseSerializer : AFHTTPResponseSerializer
+@interface AFHPXMLParserResponseSerializer : AFHPHTTPResponseSerializer
 
 @end
 
@@ -160,7 +160,7 @@
  - `application/xml`
  - `text/xml`
  */
-@interface AFXMLDocumentResponseSerializer : AFHTTPResponseSerializer
+@interface AFHPXMLDocumentResponseSerializer : AFHPHTTPResponseSerializer
 
 - (instancetype) init;
 
@@ -189,7 +189,7 @@
 
  - `application/x-plist`
  */
-@interface AFPropertyListResponseSerializer : AFHTTPResponseSerializer
+@interface AFHPPropertyListResponseSerializer : AFHPHTTPResponseSerializer
 
 - (instancetype) init;
 
@@ -232,7 +232,7 @@
  - `image/x-xbitmap`
  - `image/x-win-bitmap`
  */
-@interface AFImageResponseSerializer : AFHTTPResponseSerializer
+@interface AFHPImageResponseSerializer : AFHPHTTPResponseSerializer
 
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 /**
@@ -253,7 +253,7 @@
 /**
  `AFCompoundSerializer` is a subclass of `AFHTTPResponseSerializer` that delegates the response serialization to the first `AFHTTPResponseSerializer` object that returns an object for `responseObjectForResponse:data:error:`, falling back on the default behavior of `AFHTTPResponseSerializer`. This is useful for supporting multiple potential types and structures of server responses with a single serializer.
  */
-@interface AFCompoundResponseSerializer : AFHTTPResponseSerializer
+@interface AFHPCompoundResponseSerializer : AFHPHTTPResponseSerializer
 
 /**
  The component response serializers.
@@ -278,22 +278,22 @@
 
  The following error domain is predefined.
 
- - `NSString * const AFURLResponseSerializationErrorDomain`
+ - `NSString * const AFHPURLResponseSerializationErrorDomain`
 
  ### Constants
 
  `AFURLResponseSerializationErrorDomain`
- AFURLResponseSerializer errors. Error codes for `AFURLResponseSerializationErrorDomain` correspond to codes in `NSURLErrorDomain`.
+ AFHPURLResponseSerializer errors. Error codes for `AFURLResponseSerializationErrorDomain` correspond to codes in `NSURLErrorDomain`.
  */
-extern NSString * const AFURLResponseSerializationErrorDomain;
+extern NSString * const AFHPURLResponseSerializationErrorDomain;
 
 /**
  ## User info dictionary keys
 
  These keys may exist in the user info dictionary, in addition to those defined for NSError.
 
- - `NSString * const AFNetworkingOperationFailingURLResponseErrorKey`
- - `NSString * const AFNetworkingOperationFailingURLResponseDataErrorKey`
+ - `NSString * const AFHPNetworkingOperationFailingURLResponseErrorKey`
+ - `NSString * const AFHPNetworkingOperationFailingURLResponseDataErrorKey`
 
  ### Constants
 
@@ -303,8 +303,8 @@ extern NSString * const AFURLResponseSerializationErrorDomain;
  `AFNetworkingOperationFailingURLResponseDataErrorKey`
  The corresponding value is an `NSData` containing the original data of the operation associated with an error. This key is only present in the `AFURLResponseSerializationErrorDomain`.
  */
-extern NSString * const AFNetworkingOperationFailingURLResponseErrorKey;
+extern NSString * const AFHPNetworkingOperationFailingURLResponseErrorKey;
 
-extern NSString * const AFNetworkingOperationFailingURLResponseDataErrorKey;
+extern NSString * const AFHPNetworkingOperationFailingURLResponseDataErrorKey;
 
 

@@ -1,6 +1,6 @@
-// AFHTTPRequestOperationTests.m
+// AFHPHTTPRequestOperationTests.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +24,12 @@
 
 #import "AFHTTPRequestOperation.h"
 
-@interface AFHTTPRequestOperationTests : AFTestCase
+@interface AFHPHTTPRequestOperationTests : AFHPTestCase
 @end
 
-@implementation AFHTTPRequestOperationTests
+@implementation AFHPHTTPRequestOperationTests
 
-// FLAKY: This test does not deterministically fail when the AFHTTPRequestOperation logic is incorrect.
+// FLAKY: This test does not deterministically fail when the AFHPHTTPRequestOperation logic is incorrect.
 // See comments inside for details.
 // When this test does fail, most tests in this class will also fail, since the network thread is stalled.
 // The tests should be better encapsulated - setUp and tearDown should reset the state of the network thread.
@@ -40,10 +40,10 @@
     __block id blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         blockResponseObject = responseObject;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -67,10 +67,10 @@
     // The first operation completed, but the network thread is now in an infinite loop.
     // Future requests should not work.
     blockResponseObject = nil;
-    AFHTTPRequestOperation *operation2 = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation2 setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHPHTTPRequestOperation *operation2 = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation2 setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         blockResponseObject = responseObject;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -85,11 +85,11 @@
     __block id blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/get" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [operation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         blockResponseObject = responseObject;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -105,11 +105,11 @@
     __block NSError *blockError = nil;
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/status/204" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [operation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         blockResponseObject = responseObject;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
 
@@ -124,9 +124,9 @@
     __block NSError *blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/status/404" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -137,7 +137,7 @@
 
 - (void)testThatCancellationOfRequestOperationSetsError {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/5" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation start];
     expect([operation isExecuting]).will.beTruthy();
@@ -151,9 +151,9 @@
     __block NSError *blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/5" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -170,9 +170,9 @@
     __block NSError *blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/5" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -192,9 +192,9 @@
     __block NSError *blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/5" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -210,9 +210,9 @@
     __block NSError *blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/status/500" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -226,9 +226,9 @@
     __block NSError *blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/redirect/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     [operation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
@@ -251,9 +251,9 @@
     __block NSError *blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/redirect/5" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     [operation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
@@ -275,7 +275,7 @@
 - (void)testThatOperationCanBePaused {
     [Expecta setAsynchronousTestTimeout:3.0];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation start];
     expect([operation isExecuting]).will.beTruthy();
@@ -288,7 +288,7 @@
 - (void)testThatPausedOperationCanBeResumed {
     [Expecta setAsynchronousTestTimeout:3.0];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
     [operation start];
     expect([operation isExecuting]).will.beTruthy();
@@ -309,10 +309,10 @@
     __block id blockError = nil;
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         blockResponseObject = responseObject;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
     
@@ -331,11 +331,11 @@
 
 - (void)testThatOperationPostsDidStartNotificationWhenStarted {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/get" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
     __block BOOL notificationFound;
     
-    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingOperationDidStartNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFHPNetworkingOperationDidStartNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         if([[[note object] request] isEqual:operation.request]){
             notificationFound = YES;
         }
@@ -349,11 +349,11 @@
 
 - (void)testThatOperationPostsDidFinishNotificationWhenFinished {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/get" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
     
     __block BOOL notificationFound;
 
-    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingOperationDidFinishNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:AFHPNetworkingOperationDidFinishNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         if([[[note object] request] isEqual:operation.request]){
             notificationFound = YES;
         }
@@ -372,25 +372,25 @@
     __block id secondBlockError = nil;
 
     NSURLRequest *request1 = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/get" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation1 = [[AFHTTPRequestOperation alloc] initWithRequest:request1];
-    [operation1 setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHPHTTPRequestOperation *operation1 = [[AFHPHTTPRequestOperation alloc] initWithRequest:request1];
+    [operation1 setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         firstBlock = YES;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         firstBlockError = error;
     }];
-    [operation1 setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [operation1 setResponseSerializer:[AFHPHTTPResponseSerializer serializer]];
     
     NSURLRequest *request2 = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/delay/1" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation2 = [[AFHTTPRequestOperation alloc] initWithRequest:request2];
-    [operation2 setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHPHTTPRequestOperation *operation2 = [[AFHPHTTPRequestOperation alloc] initWithRequest:request2];
+    [operation2 setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         secondBlock = YES;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         secondBlockError = error;
     }];
-    [operation2 setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [operation2 setResponseSerializer:[AFHPHTTPResponseSerializer serializer]];
     
     __block BOOL completionBlockFiredAfterOtherBlocks = NO;
-    NSArray *batchRequests = [AFURLConnectionOperation batchOfRequestOperations:@[operation1, operation2] progressBlock:nil completionBlock:^(NSArray *operations) {
+    NSArray *batchRequests = [AFHPURLConnectionOperation batchOfRequestOperations:@[operation1, operation2] progressBlock:nil completionBlock:^(NSArray *operations) {
         if (firstBlock && secondBlock) {
             completionBlockFiredAfterOtherBlocks = YES;
         }
@@ -408,7 +408,7 @@
     __block NSError *blockError;
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/get" relativeToURL:self.baseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
     NSError *streamError = [NSError errorWithDomain:NSStreamSocketSSLErrorDomain code:0 userInfo:nil];
 
@@ -426,7 +426,7 @@
         mockStream;
     })];
 
-    [operation setCompletionBlockWithSuccess:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [operation setCompletionBlockWithSuccess:nil failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
 
@@ -441,11 +441,11 @@
 
     NSURL *secureBaseURL = [NSURL URLWithString:[self.baseURL.absoluteString stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"]];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"/get" relativeToURL:secureBaseURL]];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    AFHPHTTPRequestOperation *operation = [[AFHPHTTPRequestOperation alloc] initWithRequest:request];
 
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [operation setCompletionBlockWithSuccess:^(AFHPHTTPRequestOperation *operation, id responseObject) {
         blockResponseObject = responseObject;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHPHTTPRequestOperation *operation, NSError *error) {
         blockError = error;
     }];
 

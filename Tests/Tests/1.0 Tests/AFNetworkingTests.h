@@ -1,6 +1,6 @@
-// AFNetworkingTests.h
+// AFHPNetworkingTests.h
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,8 +27,8 @@
 #import "Expecta.h"
 #import "OCMock.h"
 
-extern NSString * const AFNetworkingTestsBaseURLString;
+extern NSString * const AFHPNetworkingTestsBaseURLString;
 
-@interface AFNetworkingTests : NSObject
+@interface AFHPNetworkingTests : NSObject
 
 @end

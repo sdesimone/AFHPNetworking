@@ -1,6 +1,6 @@
 // UIProgressView+AFNetworking.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,10 +32,10 @@
 #import "AFURLSessionManager.h"
 #endif
 
-static void * AFTaskCountOfBytesSentContext = &AFTaskCountOfBytesSentContext;
-static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedContext;
+static void * AFHPTaskCountOfBytesSentContext = &AFHPTaskCountOfBytesSentContext;
+static void * AFHPTaskCountOfBytesReceivedContext = &AFHPTaskCountOfBytesSentContext;
 
-@interface AFURLConnectionOperation (_UIProgressView)
+@interface AFHPURLConnectionOperation (_UIProgressView)
 @property (readwrite, nonatomic, copy) void (^uploadProgress)(NSUInteger bytes, long long totalBytes, long long totalBytesExpected);
 @property (readwrite, nonatomic, assign, setter = af_setUploadProgressAnimated:) BOOL af_uploadProgressAnimated;
 
@@ -43,17 +43,17 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 @property (readwrite, nonatomic, assign, setter = af_setDownloadProgressAnimated:) BOOL af_downloadProgressAnimated;
 @end
 
-@implementation AFURLConnectionOperation (_UIProgressView)
-@dynamic uploadProgress; // Implemented in AFURLConnectionOperation
+@implementation AFHPURLConnectionOperation (_UIProgressView)
+@dynamic uploadProgress; // Implemented in AFHPURLConnectionOperation
 @dynamic af_uploadProgressAnimated;
 
-@dynamic downloadProgress; // Implemented in AFURLConnectionOperation
+@dynamic downloadProgress; // Implemented in AFHPURLConnectionOperation
 @dynamic af_downloadProgressAnimated;
 @end
 
 #pragma mark -
 
-@implementation UIProgressView (AFNetworking)
+@implementation UIProgressView (AFHPNetworking)
 
 - (BOOL)af_uploadProgressAnimated {
     return [(NSNumber *)objc_getAssociatedObject(self, @selector(af_uploadProgressAnimated)) boolValue];
@@ -77,8 +77,8 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 - (void)setProgressWithUploadProgressOfTask:(NSURLSessionUploadTask *)task
                                    animated:(BOOL)animated
 {
-    [task addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptions)0 context:AFTaskCountOfBytesSentContext];
-    [task addObserver:self forKeyPath:@"countOfBytesSent" options:(NSKeyValueObservingOptions)0 context:AFTaskCountOfBytesSentContext];
+    [task addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptions)0 context:AFHPTaskCountOfBytesSentContext];
+    [task addObserver:self forKeyPath:@"countOfBytesSent" options:(NSKeyValueObservingOptions)0 context:AFHPTaskCountOfBytesSentContext];
 
     [self af_setUploadProgressAnimated:animated];
 }
@@ -86,8 +86,8 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 - (void)setProgressWithDownloadProgressOfTask:(NSURLSessionDownloadTask *)task
                                      animated:(BOOL)animated
 {
-    [task addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptions)0 context:AFTaskCountOfBytesReceivedContext];
-    [task addObserver:self forKeyPath:@"countOfBytesReceived" options:(NSKeyValueObservingOptions)0 context:AFTaskCountOfBytesReceivedContext];
+    [task addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptions)0 context:AFHPTaskCountOfBytesReceivedContext];
+    [task addObserver:self forKeyPath:@"countOfBytesReceived" options:(NSKeyValueObservingOptions)0 context:AFHPTaskCountOfBytesReceivedContext];
 
     [self af_setDownloadProgressAnimated:animated];
 }
@@ -95,7 +95,7 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 
 #pragma mark -
 
-- (void)setProgressWithUploadProgressOfOperation:(AFURLConnectionOperation *)operation
+- (void)setProgressWithUploadProgressOfOperation:(AFHPURLConnectionOperation *)operation
                                         animated:(BOOL)animated
 {
     __weak __typeof(self)weakSelf = self;
@@ -114,7 +114,7 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
     }];
 }
 
-- (void)setProgressWithDownloadProgressOfOperation:(AFURLConnectionOperation *)operation
+- (void)setProgressWithDownloadProgressOfOperation:(AFHPURLConnectionOperation *)operation
                                           animated:(BOOL)animated
 {
     __weak __typeof(self)weakSelf = self;
@@ -141,7 +141,7 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
                        context:(void *)context
 {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    if (context == AFTaskCountOfBytesSentContext || context == AFTaskCountOfBytesReceivedContext) {
+    if (context == AFHPTaskCountOfBytesSentContext || context == AFHPTaskCountOfBytesReceivedContext) {
         if ([keyPath isEqualToString:NSStringFromSelector(@selector(countOfBytesSent))]) {
             if ([object countOfBytesExpectedToSend] > 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -163,11 +163,11 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
                 @try {
                     [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(state))];
 
-                    if (context == AFTaskCountOfBytesSentContext) {
+                    if (context == AFHPTaskCountOfBytesSentContext) {
                         [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesSent))];
                     }
 
-                    if (context == AFTaskCountOfBytesReceivedContext) {
+                    if (context == AFHPTaskCountOfBytesReceivedContext) {
                         [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesReceived))];
                     }
                 }

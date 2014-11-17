@@ -1,6 +1,6 @@
-// AFTestCase.m
+// AFHPTestCase.m
 //
-// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFHPNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +22,9 @@
 
 #import "AFTestCase.h"
 
-NSString * const AFNetworkingTestsBaseURLString = @"https://httpbin.org/";
+NSString * const AFHPNetworkingTestsBaseURLString = @"https://httpbin.org/";
 
-@implementation AFTestCase
+@implementation AFHPTestCase
 
 - (void)setUp {
     [super setUp];
@@ -39,7 +39,7 @@ NSString * const AFNetworkingTestsBaseURLString = @"https://httpbin.org/";
 #pragma mark -
 
 - (NSURL *)baseURL {
-    return [NSURL URLWithString:AFNetworkingTestsBaseURLString];
+    return [NSURL URLWithString:AFHPNetworkingTestsBaseURLString];
 }
 
 @end
